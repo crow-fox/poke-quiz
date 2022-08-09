@@ -1,0 +1,57 @@
+import { FC } from "react";
+import { Pokemon } from "../../../types/Pokemon";
+import { Center } from "../../atoms/styles/Center";
+import { Stack } from "../../atoms/styles/Stack";
+import { TextBase } from "../../atoms/texts/TextBase";
+
+type Props = {
+  pokemon: Pokemon | undefined;
+};
+
+export const Giveup: FC<Props> = (props) => {
+  const { pokemon } = props;
+  return (
+    <Stack>
+      <Stack gap="var(--s-3)">
+        <TextBase styles={{ fontSize: "var(--f1)", lineHeight: "var(--lh-1)" }}>
+          正解は
+        </TextBase>
+        <TextBase
+          styles={{
+            fontSize: "var(--f5)",
+            fontWeight: "700",
+            lineHeight: "var(--lh-5)",
+          }}
+          level={2}
+        >
+          {pokemon?.japanName}
+        </TextBase>
+        <TextBase
+          styles={{
+            fontSize: "var(--f-1)",
+            lineHeight: "var(--lh-1)",
+            textTransform: "capitalize",
+          }}
+        >
+          {pokemon?.foreignName}
+        </TextBase>
+        <TextBase
+          styles={{
+            fontSize: "var(--f-1)",
+            lineHeight: "var(--lh-1)",
+          }}
+        >
+          タイプ：{pokemon?.types.join("・")}
+        </TextBase>
+      </Stack>
+      <Center contentCenter={true}>
+        <img
+          width="200"
+          height="200"
+          src={pokemon?.imgUrl}
+          alt={pokemon?.japanName + "の画像"}
+        />
+      </Center>
+    </Stack>
+  );
+};
